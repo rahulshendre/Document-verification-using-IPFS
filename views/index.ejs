@@ -1,47 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Upload to Pinata</title>
-    <link rel="stylesheet" href="index.css">
-   
-  </head>
-  <body>
-    <!-- Navbar -->
+    <link rel="stylesheet" href="index.css" />
+    <style>
+        /* Web lines */
+        .line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5); /* Default line color (lower opacity) */
+            height: 2px; /* Thickness of the lines */
+            z-index: 1; /* Lower z-index to be below buttons */
+            pointer-events: none; /* Allow clicks to pass through */
+            transition: background-color 0.3s ease; /* Smooth color transition */
+        }
+
+        /* Faint lines */
+        .line.faint {
+            background-color: rgba(255, 255, 255, 0.1); /* Faint white (lower opacity) */
+        }
+
+        /* Dark lines */
+        .line.dark {
+            background-color: rgba(255, 255, 255, 1); /* Darker white (full opacity) */
+        }
+
+        /* Glowing lines */
+        .line.glow {
+            background-color: rgba(255, 255, 255, 0.1); /* Lower opacity for glow */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.2); /* Reduced glow effect */
+        }
+    </style>
+</head>
+<body>
     <nav class="navbar">
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/login">Login</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/login">Login</a>
     </nav>
 
-    <!-- Banner -->
     <div class="banner">
-      <div class="text-box">
-        <h1>Upload a File to Pinata</h1>
-      </div>
-      <form action="/upload" method="POST" enctype="multipart/form-data">
-        <div class="file-input-container">
-          <input type="file" name="file" required />
+        <div class="text-box">
+            <h1>Upload a File to Pinata</h1>
         </div>
-        <button class="button" type="submit">Upload</button>
-      </form>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="file-input-container">
+                <input type="file" name="file" id="file-upload" required />
+                <label for="file-upload" class="file-upload-label">Browse</label>
+                <span class="file-name-display" id="file-name">No file chosen</span>
+            </div>
+            <button class="button" type="submit" id="upload-button" disabled>Upload</button>
+        </form>
 
-      <!-- Output for IPFS Hash -->
-      <% if (ipfsHash) { %>
-      <h2 class="output-text">
-        Stored IPFS Hash:
-        <a href="https://ipfs.io/ipfs/<%= ipfsHash %>" target="_blank"
-          ><%= ipfsHash %></a
-        >
-      </h2>
-      <% } %>
+        <% if (ipfsHash) { %>
+        <div class="output-text">
+            <h2>
+                Stored IPFS Hash:
+                <a href="https://ipfs.io/ipfs/<%= ipfsHash %>" target="_blank"
+                ><%= ipfsHash %></a>
+            </h2>
+        </div>
+        <% } %>
 
-      <!-- Verification Message -->
-      <% if (verificationMessage) { %>
-      <h3 class="verification-message"><%= verificationMessage %></h3>
-      <% } %>
+        <% if (verificationMessage) { %>
+        <h3 class="verification-message"><%= verificationMessage %></h3>
+        <% } %>
     </div>
-  </body>
+
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+            document.getElementById('upload-button').disabled = !this.files.length; // Enable button if a file is chosen
+        });
+
+        // Web lines functionality
+        let linesTimeout; // To clear lines after mouse is idle
+
+        // Function to draw lines
+        function drawLine(startX, startY, endX, endY) {
+            const line = document.createElement('div');
+            line.classList.add('line');
+            // Randomly assign a class to create variety
+            const randomClass = Math.floor(Math.random() * 3);
+            if (randomClass === 0) {
+                line.classList.add('faint'); // Faint line
+            } else if (randomClass === 1) {
+                line.classList.add('dark'); // Dark line
+            } else {
+                line.classList.add('glow'); // Glowing line
+            }
+            document.body.appendChild(line);
+            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            line.style.width = `${length}px`;
+            line.style.transformOrigin = '0 0';
+            line.style.transform = `rotate(${Math.atan2(endY - startY, endX - startX)}rad)`;
+            line.style.left = `${startX}px`;
+            line.style.top = `${startY}px`;
+        }
+
+        // Function to create lines based on cursor movement
+        function createLines(e) {
+            // Remove existing lines
+            const existingLines = document.querySelectorAll('.line');
+            existingLines.forEach(line => line.remove());
+
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // Create lines to the corners and edges of the screen
+            const corners = [
+                { x: 0, y: 0 }, // Top left
+                { x: window.innerWidth, y: 0 }, // Top right
+                { x: window.innerWidth, y: window.innerHeight }, // Bottom right
+                { x: 0, y: window.innerHeight } // Bottom left
+            ];
+
+            const edges = [
+                { x: window.innerWidth / 2, y: 0 }, // Top edge center
+                { x: window.innerWidth, y: window.innerHeight / 2 }, // Right edge center
+                { x: window.innerWidth / 2, y: window.innerHeight }, // Bottom edge center
+                { x: 0, y: window.innerHeight / 2 } // Left edge center
+            ];
+
+            const points = [...corners, ...edges];
+
+            points.forEach(point => {
+                drawLine(mouseX, mouseY, point.x, point.y);
+            });
+
+            // Reset timeout to hide lines after mouse stops moving
+            clearTimeout(linesTimeout);
+            linesTimeout = setTimeout(() => {
+                const lines = document.querySelectorAll('.line');
+                lines.forEach(line => line.remove()); // Remove lines after a delay
+            }, 500); // Adjust the delay as needed (in milliseconds)
+        }
+
+        // Add event listener for mouse movement
+        document.addEventListener('mousemove', createLines);
+    </script>
+</body>
 </html>

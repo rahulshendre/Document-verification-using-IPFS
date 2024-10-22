@@ -53,6 +53,12 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about'); // Ensure you have an 'about.ejs' file in the views directory
 });
+app.get('/login', (req, res) => {
+    res.render('login'); // Ensure you have an 'about.ejs' file in the views directory
+});
+app.get('/contact', (req, res) => {
+    res.render('contact'); // Ensure you have an 'about.ejs' file in the views directory
+});
 
 // Admin Login Route
 app.get('/admin-login', (req, res) => {
@@ -173,7 +179,7 @@ app.post('/upload', isAuthenticated, async (req, res) => {
 
             // Compare the original file hash with the retrieved file hash
             const verificationMessage = originalFileHash === retrievedFileHash
-                ? 'File verified and authentic.'
+                ? 'File uploaded'
                 : 'File has been altered or is not authentic.';
 
             // Clean up uploaded file after processing

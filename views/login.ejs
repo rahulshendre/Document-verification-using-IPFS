@@ -4,45 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('/background%20image.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .navbar {
-            background-color: #FF8C00;
-            padding: 10px;
-            display: flex;
-            justify-content: center; /* Center items */
-            align-items: center;
-            margin-bottom: 20px; /* Space between navbar and content */
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px; /* Padding around the links */
-            font-size: 18px;
-            margin: 0 10px; /* Space between links */
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s; /* Smooth transition */
-        }
-        .navbar a:hover {
-            background-color: darkorange; /* Change color on hover */
-        }
-        .content {
-            position: relative;
-            color: orange;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: 20%;
-        }
-    </style>
+    <link rel="stylesheet" href="login.css"> <!-- Make sure this path is correct -->
 </head>
 <body>
     <nav class="navbar">
@@ -50,13 +12,18 @@
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <a href="/login">Login</a>
-        <a href="/admin-login">Admin Login</a>
-        <a href="/verifier-login">Verifier Login</a>
     </nav>
-
-    <div class="content">
-        <h1>About Us</h1>
-        <p>We are a team of developers passionate about decentralized technologies and blockchain-based solutions.</p>
+    
+    <div class="banner"> <!-- Banner div for the overlay -->
+        <div class="content"> <!-- Content inside the banner -->
+            <h1>Login</h1>
+            <p>Please select an option</p>
+        </div>
+        
+        <div class="button-container"> <!-- New div for the buttons -->
+            <button onclick="window.location.href='/admin-login'" class="button">Admin Login</button>
+        <button onclick="window.location.href='/verifier-login'" class="button">Verifier Login</button>
+        </div>
     </div>
 </body>
 </html>

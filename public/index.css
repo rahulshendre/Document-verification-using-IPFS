@@ -5,7 +5,7 @@ body {
   background-size: cover;
 }
 .navbar {
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
   display: flex;
   justify-content: space-around;
@@ -17,10 +17,13 @@ body {
   padding: 10px;
   font-size: 22px;
   font-weight: 700;
+  transition: transform 0.3s, box-shadow 0.3s; /* Add transition */
 }
 .navbar a:hover {
   background-color: darkorange;
   border-radius: 5px;
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }
 .banner {
   position: relative;
@@ -39,7 +42,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.65);
   z-index: 1;
 }
 .text-box {
@@ -51,6 +54,39 @@ body {
   background-color: #ff8c00;
   border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s; /* Add transition */
+}
+.text-box:hover {
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Enhanced shadow */
+}
+.file-input-container {
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+}
+.file-upload-label {
+  display: inline-block;
+  background-color: #ff8c00;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Add transition */
+}
+.file-upload-label:hover {
+  background-color: darkorange;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+input[type="file"] {
+  display: none;
+}
+.file-name-display {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  z-index: 2;
 }
 .button {
   position: relative;
@@ -62,48 +98,47 @@ body {
   z-index: 2;
   margin-top: 10px;
   border-radius: 5px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Add transition */
 }
 .button:hover {
   background-color: darkorange;
-}
-.file-input-container {
-  position: relative;
-  z-index: 2;
-  margin-top: 10px;
-  background-color: #ff8c00;
-  border-radius: 5px;
-  overflow: hidden;
-}
-input[type="file"] {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  z-index: 2;
-}
-input[type="file"]::-webkit-file-upload-button {
-  background-color: #ff8c00;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-}
-input[type="file"]::-webkit-file-upload-button:hover {
-  background-color: darkorange;
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }
 .output-text {
-  color: white;
+  color: #fff; /* Text color */
   z-index: 2;
   margin-top: 10px;
   text-align: center;
+  position: relative; /* Position relative to allow absolute positioning of the background */
+  transition: transform 0.3s; /* Add transition */
 }
+
+.output-text::before {
+  content: ""; /* Empty content to create a pseudo-element */
+  position: absolute; /* Position it absolutely */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  right: 0; /* Extend to the right */
+  bottom: 0; /* Extend to the bottom */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+  border-radius: 5px; /* Optional: rounded corners */
+  z-index: -1; /* Position it behind the text */
+  padding: 10px; /* Optional: add some padding */
+}
+
 .output-text a {
-  color: #ff8c00;
-  text-decoration: underline;
+  color: #fff; /* Change this to your desired link color */
+  text-decoration: none; /* Remove underline from the link */
+  transition: color 0.3s, text-shadow 0.3s; /* Add transition */
 }
+
+.output-text a:hover {
+  color: blue; /* Change this to your desired hover color */
+  text-decoration: underline; /* Optional: add underline on hover */
+  text-shadow: 0 0 5px rgba(0, 0, 255, 0.5); /* Shadow effect on hover */
+}
+
 .verification-message {
   color: orange;
   z-index: 2;

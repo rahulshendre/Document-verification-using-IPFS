@@ -4,32 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('/background%20image.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .content {
-            position: relative;
-            color: orange;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: 20%;
-        }
-    </style>
+    <link rel="stylesheet" href="contact.css">
 </head>
 <body>
-    <div class="content">
-        <h1>Contact Us</h1>
-        <p>Feel free to reach out via email or phone. We're always happy to connect with you!</p>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/login">Login</a>
+    </nav>
 
-        
+    <div class="banner">
+        <div class="overlay"></div> <!-- Added overlay div -->
+        <div class="content">
+            <h1>Contact Us</h1>
+            <p>We would love to hear from you! Please fill out the form below and we will get back to you as soon as possible.</p>
+            
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+
+            <div class="message-sent" id="messageSent">Message Sent!</div>
+        </div>
     </div>
+
+    <audio id="dingSound" src="ding.mp3"></audio>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const messageSent = document.getElementById('messageSent');
+        const dingSound = document.getElementById('dingSound');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            
+            dingSound.play().catch((error) => {
+                console.error("Error playing sound:", error);
+            });
+
+            // Show the message
+            messageSent.classList.add('show');
+            setTimeout(() => {
+                messageSent.classList.remove('show'); // Hide after 2 seconds
+            }, 2000);
+        });
+    </script>
 </body>
 </html>

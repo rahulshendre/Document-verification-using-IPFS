@@ -1,39 +1,105 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url("/background%20image.jpg") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('/background%20image.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .navbar {
-            background-color: #FF8C00;
-            padding: 10px;
-            display: flex;
-            justify-content: center; /* Center items */
-            align-items: center;
-            margin-bottom: 20px; /* Space between navbar and content */
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px; /* Padding around the links */
-            font-size: 18px;
-            margin: 0 10px; /* Space between links */
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s; /* Smooth transition */
-        }
-        .navbar a:hover {
-            background-color: darkorange; /* Change color on hover */
-        }
-        .content {
-            position: relative;
-            color: orange;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: 20%;
-        }
-    
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.navbar a:hover {
+  background-color: darkorange;
+  border-radius: 5px;
+}
+
+.content {
+  position: relative;
+  color: white;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  margin: 5% auto;
+  max-width: 800px;
+  transition: box-shadow 0.3s;
+  
+}
+
+
+.content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 18px;
+}
+
+.institute-name {
+  color: orange;
+  font-weight: bold;
+}
+
+.team-cards {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px orange;
+}
+
+.card h2 {
+  color: orange;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: white;
+  font-size: 16px;
+}

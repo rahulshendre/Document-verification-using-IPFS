@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url("/background%20image.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.navbar a:hover {
+  background-color: darkorange;
+  border-radius: 5px;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.text-box {
+  position: relative;
+  color: white;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  background-color: #ff8c00;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.button {
+  position: relative;
+  background-color: #ff8c00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 2;
+  margin-top: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.button:hover {
+  background-color: darkorange;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.file-input-container {
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+.file-upload-label {
+  display: inline-block;
+  background-color: #ff8c00;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.file-upload-label:hover{
+  background-color: darkorange;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+.file-name {
+  color: #fff; /* Lighter white for better visibility */
+  margin-left: 10px; /* Space between button and file name */
+  font-weight: bold;
+}
+
+.verification-message {
+  color: orange;
+  z-index: 2;
+  text-align: center;
+  margin-top: 10px;
+}

@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url("/background%20image.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.login-container {
+  position: relative;
+  color: orange;
+  z-index: 2; /* Ensure content is above the overlay */
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6); /* Background color for better readability */
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  margin: 100px auto;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: #ff8c00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: darkorange;
+}
+
+/* Overlay styles */
+.overlay {
+  position: fixed; /* Use fixed to cover entire viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1; /* Ensure it's below the content */
+}
+  
